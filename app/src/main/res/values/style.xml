@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ColorGroupStyle">
+        <item name="android:layout_marginStart">@dimen/margin_RadioButton</item>
+        <item name="android:layout_marginEnd">@dimen/margin_RadioButton</item>
+        <item name="android:button">@drawable/actions_background</item>
+        <item name="android:layout_width">@dimen/widthRB</item>
+        <item name="android:layout_height">@dimen/heightRB</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <dimen name="widthRB">40dp</dimen>
+    <dimen name="heightRB">40dp</dimen>
+</resources>

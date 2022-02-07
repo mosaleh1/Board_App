@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.example.boardapp.BoardCustomView
+        android:id="@+id/boardCustomView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/actions_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        app:tabIndicatorFullWidth="false"
+        app:layout_constraintVertical_bias="0.050000012">
+
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/action_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_edit_24"
+            app:background="@drawable/actions_background"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/action_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_arrow_24"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/action_rectangle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_rect_24"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/action_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_circle_24"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/action_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_color_lens_24"
+            />
+    </com.google.android.material.tabs.TabLayout>
+
+
+        <RadioGroup
+            android:id="@+id/color_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/tabLayout"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+            app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+            app:layout_constraintHorizontal_bias="0.90"
+            android:padding="5dp"
+       >
+
+        <RadioButton
+            android:id="@+id/red_color"
+            android:background="@drawable/selected_red"
+            style="@style/ColorGroupStyle"
+            />
+
+        <RadioButton
+            android:id="@+id/green_color"
+            style="@style/ColorGroupStyle"
+            android:background="@drawable/selected_green"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/blue_color"
+            android:background="@drawable/selected_blue"
+            style="@style/ColorGroupStyle"
+            />
+
+        <RadioButton
+            android:id="@+id/black_color"
+            android:background="@drawable/selected_black"
+            style="@style/ColorGroupStyle"
+            />
+
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
