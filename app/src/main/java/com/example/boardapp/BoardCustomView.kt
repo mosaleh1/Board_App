@@ -93,16 +93,13 @@ class BoardCustomView @JvmOverloads constructor(
                     pathList.add(Arrow(startX, startY, endX, endY, Paint(paint)))
                 }
 
-            } else if (action is BoardActions.ActionArrow && !isActionDown) {
+            } else if (action is BoardActions.ActionCircle && !isActionDown) {
                 synchronized(pathList) {
                     val rect = Rect(startX.toInt(), startY.toInt(), endX.toInt(), endY.toInt())
-                    val radius = ((startX - endX) + (startY - endY))
+                    //val radius = ((startX - endX) + (startY - endY))
                     pathList.add(
                         Circle(
-                            rect.centerX().toFloat(),
-                            rect.centerY().toFloat(),
-                            radius.toInt(),
-                            Paint(paint)
+                            rect, Paint(paint)
                         )
                     )
                 }
@@ -115,8 +112,6 @@ class BoardCustomView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.save()
-
         synchronized(pathList) {
             for (shape in pathList) {
                 when (shape) {
@@ -133,7 +128,6 @@ class BoardCustomView @JvmOverloads constructor(
                         drawArrow(canvas, shape)
                     }
                 }
-                canvas.save()
             }
         }
         when (action) {
@@ -145,7 +139,6 @@ class BoardCustomView @JvmOverloads constructor(
             }
             BoardActions.ActionCircle -> {
                 drawCircle(canvas)
-                canvas.save()
             }
             BoardActions.ActionRectangle -> {
                 drawRect(canvas)
@@ -154,18 +147,14 @@ class BoardCustomView @JvmOverloads constructor(
     }
 
 
-    private fun drawArrow(canvas: Canvas, shape: Arrow) {
-        canvas.drawLine(shape.startX, shape.startY, shape.stopX, shape.stopY, shape.arrowPaint)
-    }
-
     private fun drawPath(canvas: Canvas, shape: Prush) {
-        canvas.drawPath(path, shape.paintParam)
-        canvas.save()
+        canvas.drawPath(path, shape.paint)
+        Log.d(TAG, "drawPath: 2 is called")
     }
 
     private fun drawPath(canvas: Canvas) {
         canvas.drawPath(path, paint)
-        canvas.save()
+        Log.d(TAG, "drawPath: 1 is called")
     }
 
     private fun drawRect(canvas: Canvas, shape: Rectangle) {
@@ -177,24 +166,25 @@ class BoardCustomView @JvmOverloads constructor(
     }
 
     private fun drawCircle(canvas: Canvas, shape: Circle) {
-        canvas.drawCircle(
-            shape.cx
-            ,shape.cy,
-            shape.radius.toFloat(),
-            shape.paintC
-        )
+        val rect = RectF(shape.left, shape.top, shape.right, shape.bottom)
+        canvas.drawOval(rect, shape.paintC)
         canvas.save()
     }
 
     private fun drawCircle(canvas: Canvas) {
         //val radius = ((startX - endX) + (startY - endY))
-        val radius = (startX - endX) - (startY - endY)
-        val rect = Rect(startX.toInt(), startY.toInt(), endX.toInt(), endY.toInt())
-        canvas.drawCircle(rect.centerX().toFloat(), rect.centerY().toFloat(), radius, paint)
+        // val radius = (startX - endX) + (startY - endY)
+        val rect = RectF(startX, startY, endX, endY)
+        //canvas.drawCircle(rect.centerX(), rect.centerY(), radius, paint)
+        canvas.drawOval(rect, paint)
     }
 
     private fun drawArrow(canvas: Canvas) {
         canvas.drawLine(startX, startY, endX, endY, paint)
+    }
+
+    private fun drawArrow(canvas: Canvas, shape: Arrow) {
+        canvas.drawLine(shape.startX, shape.startY, shape.stopX, shape.stopY, shape.arrowPaint)
     }
 
     fun changeColor(color: Int) {
